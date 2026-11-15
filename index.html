@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ludo Unggah-Ungguh Basa Jawa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= MENU UTAMA ================= -->
+<section id="scr-menu" class="screen active">
+  <div class="menu-card">
+    <div class="logo-dice" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    <h1 class="title">LUDO<br><small>UNGGAH-UNGGUH</small><br>BASA JAWA</h1>
+    <p class="subtitle">Dolanan Ludo sinambi sinau unggah-ungguh basa Jawa</p>
+    <nav class="menu-buttons">
+      <button class="btn big red" data-go="setup">🎲 BERMAIN</button>
+      <button class="btn big yellow" data-modal="m-materi">📖 MATERI</button>
+      <button class="btn big blue" data-modal="m-aturan">📜 PERATURAN</button>
+      <button class="btn big green" data-modal="m-pembuat">👤 PEMBUAT GAME</button>
+    </nav>
+  </div>
+</section>
+
+<!-- ================= PENAMAAN PEMAIN ================= -->
+<section id="scr-setup" class="screen">
+  <div class="panel-card">
+    <h2>Nama Pemain / Kelompok</h2>
+    <form id="setup-form" class="name-grid">
+      <label class="name-field red"><span>MERAH</span><input name="red" maxlength="24" placeholder="Pemain Merah"></label>
+      <label class="name-field yellow"><span>KUNING</span><input name="yellow" maxlength="24" placeholder="Pemain Kuning"></label>
+      <label class="name-field blue"><span>BIRU</span><input name="blue" maxlength="24" placeholder="Pemain Biru"></label>
+      <label class="name-field green"><span>HIJAU</span><input name="green" maxlength="24" placeholder="Pemain Hijau"></label>
+      <div class="setup-actions">
+        <button type="button" class="btn ghost" data-go="menu">⬅ Kembali</button>
+        <button type="submit" class="btn big green">MULAI PERMAINAN ▶</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ================= PAPAN PERMAINAN ================= -->
+<section id="scr-game" class="screen">
+  <div class="game-layout">
+    <div class="board-wrap">
+      <div id="board" class="board" aria-label="Papan Ludo"></div>
+    </div>
+    <aside class="side">
+      <div id="turn-box" class="turn-box">
+        <span class="turn-dot" aria-hidden="true"></span>
+        <div class="turn-info">
+          <div class="turn-label">Giliran</div>
+          <div id="turn-name" class="turn-name">-</div>
+          <div id="turn-msg" class="turn-msg">Kocok dadu</div>
+        </div>
+      </div>
+      <div class="dice-zone">
+        <div class="dice-stage"><div id="dice" class="dice"></div><div class="dice-shadow"></div></div>
+        <button id="btn-roll" class="btn big roll">🎲 KOCOK<span class="full"> DADU</span></button>
+      </div>
+      <div id="scoreboard" class="scoreboard"></div>
+      <div class="side-actions">
+        <button id="btn-sound" class="btn small ghost" aria-pressed="false">🔊</button>
+        <button class="btn small ghost" data-modal="m-aturan">📜 Aturan</button>
+        <button class="btn small ghost" data-modal="m-materi">📖 Materi</button>
+        <button id="btn-end" class="btn small danger">⏹ <span class="full">AKHIRI PERMAINAN</span><span class="short">Akhiri</span></button>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= HASIL AKHIR ================= -->
+<section id="scr-result" class="screen">
+  <div class="panel-card wide">
+    <h2>HASIL AKHIR PERMAINAN</h2>
+    <div id="result-status" class="result-status"></div>
+    <div id="result-list" class="result-list"></div>
+    <details class="calc-note">
+      <summary>Cara penghitungan nilai akhir</summary>
+      <div id="calc-text"></div>
+    </details>
+    <div class="result-actions">
+      <button class="btn blue" id="btn-detail">🔍 LIHAT DETAIL HASIL</button>
+      <button class="btn red" id="btn-pdf">📄 UNDUH TRANSKRIP PDF</button>
+      <button class="btn green" id="btn-again">🔁 MAIN LAGI</button>
+      <button class="btn ghost" data-go="menu">🏠 KEMBALI KE MENU UTAMA</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MODAL: MATERI ================= -->
+<div id="m-materi" class="modal" role="dialog" aria-modal="true" aria-labelledby="t-materi">
+  <div class="modal-box large">
+    <button class="close" data-close aria-label="Tutup">✕</button>
+    <h2 id="t-materi">📖 Materi Unggah-Ungguh Basa Jawa</h2>
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="t0">🏠 Ringkasan</button>
+      <button class="tab t-red" data-tab="t1">Ngoko Lugu</button>
+      <button class="tab t-yellow" data-tab="t2">Ngoko Alus</button>
+      <button class="tab t-blue" data-tab="t3">Krama Lugu</button>
+      <button class="tab t-green" data-tab="t4">Krama Alus</button>
+      <button class="tab" data-tab="t5">🔤 Kosakata</button>
+      <button class="tab" data-tab="t6">💡 Tips</button>
+    </div>
+
+    <!-- RINGKASAN -->
+    <article class="tab-panel active" id="t0">
+      <div class="callout">
+        <b>Apa itu unggah-ungguh basa?</b><br>
+        Aturan sopan santun berbahasa Jawa: <b>kata yang dipakai menyesuaikan siapa lawan bicaranya</b>.
+        Bahasa ini peka konteks, jadi kalimat yang sama bisa berubah tergantung kepada siapa kita berbicara.
+      </div>
+      <h4>Tiga hal yang menentukan pilihan bahasa</h4>
+      <div class="chips big-chips">
+        <span>🎂 <b>Umur</b><small>lebih tua / lebih muda</small></span>
+        <span>🎖️ <b>Kedudukan</b><small>pangkat, jabatan, status</small></span>
+        <span>🤝 <b>Keakraban</b><small>sudah akrab / belum akrab</small></span>
+      </div>
+      <h4>Peta cepat 4 ragam <small class="muted">(ketuk kartu untuk membaca lengkap)</small></h4>
+      <div class="lvl-grid">
+        <button class="lvl-card red" data-tab="t1">
+          <span class="lvl-tag">1 · Paling akrab</span><b>Ngoko Lugu</b>
+          <span class="formula">ngoko semua</span>
+          <span>👥 Teman akrab, orang tua ke anak</span>
+          <i>"Aku arep mangan."</i>
+        </button>
+        <button class="lvl-card yellow" data-tab="t2">
+          <span class="lvl-tag">2 · Akrab tapi hormat</span><b>Ngoko Alus</b>
+          <span class="formula">ngoko + krama inggil</span>
+          <span>👥 Sesama guru, kakak yang dihormati</span>
+          <i>"Panjenengan tindak ngendi?"</i>
+        </button>
+        <button class="lvl-card blue" data-tab="t3">
+          <span class="lvl-tag">3 · Sopan standar</span><b>Krama Lugu</b>
+          <span class="formula">krama semua</span>
+          <span>👥 Orang yang kenal tapi belum akrab</span>
+          <i>"Sampeyan saking griya?"</i>
+        </button>
+        <button class="lvl-card green" data-tab="t4">
+          <span class="lvl-tag">4 · Paling hormat</span><b>Krama Alus</b>
+          <span class="formula">krama + krama inggil</span>
+          <span>👥 Murid ke guru, anak ke orang tua</span>
+          <i>"Bapak badhe tindak pundi?"</i>
+        </button>
+      </div>
+      <h4>Tiga jenis kata yang perlu dikenal</h4>
+      <div class="table-scroll"><table class="vocab">
+        <thead><tr><th>Jenis kata</th><th>Dipakai untuk</th><th>Contoh ("makan")</th></tr></thead>
+        <tbody>
+          <tr><td><b>Ngoko</b></td><td>Bahasa sehari-hari yang akrab</td><td>mangan</td></tr>
+          <tr><td><b>Krama</b></td><td>Bahasa sopan, boleh untuk diri sendiri</td><td>nedha</td></tr>
+          <tr><td><b>Krama Inggil</b></td><td>Menghormati <u>orang lain</u>, <b>tidak boleh</b> untuk diri sendiri</td><td>dhahar</td></tr>
+        </tbody>
+      </table></div>
+    </article>
+
+    <!-- NGOKO LUGU -->
+    <article class="tab-panel" id="t1">
+      <div class="lvl-head red"><b>Ngoko Lugu</b><span class="formula">ngoko semua</span></div>
+      <section class="m-sec"><h4>📌 Pengertian</h4>
+        <p>Ragam bahasa Jawa yang <b>seluruh kalimatnya memakai kosakata ngoko</b>. Imbuhannya (awalan dan akhiran) juga tetap ngoko.</p></section>
+      <section class="m-sec"><h4>👥 Dipakai kepada</h4>
+        <ul class="check">
+          <li><b>Orang yang lebih tinggi ke yang lebih rendah</b> (umur, kedudukan, keturunan, pangkat, kekayaan). Contoh: majikan ke pembantu, orang tua ke anak, kakek ke cucu, paman ke keponakan.</li>
+          <li><b>Orang yang sudah akrab</b> dan tidak berusaha saling menghormati. Contoh: teman akrab, kakak ke adik.</li>
+          <li><b>Komunikasi umum</b>: pengumuman, iklan, menawarkan barang, surat kabar.</li>
+        </ul></section>
+      <section class="m-sec"><h4>📏 Kaidah</h4>
+        <ul><li>Semua kata dan imbuhan memakai ngoko.</li><li>Tidak dicampur kata krama maupun krama inggil.</li></ul></section>
+      <section class="m-sec"><h4>💬 Contoh percakapan: Bayu &amp; Sinta (teman sekelas)</h4>
+        <div class="chat">
+          <p class="l"><b>Bayu</b>Hallo Sin?</p><p class="r"><b>Sinta</b>Hallo Bay.</p>
+          <p class="l"><b>Bayu</b>Piye kabare Sin?</p>
+          <p class="r"><b>Sinta</b>Alhamdulillah, aku ya apik, Sin. Eh..aku arep takon, awake dhewe sida nggarap tugas Bahasa Jawa ora?</p>
+          <p class="l"><b>Bayu</b>Tugas Bahasa Jawa sing kon gawe sesorah iku ya?</p>
+          <p class="r"><b>Sinta</b>Iya bener</p><p class="l"><b>Bayu</b>Sida, Bay</p>
+          <p class="r"><b>Sinta</b>Papane ing ngendi?</p>
+          <p class="l"><b>Bayu</b>Wingi wis padha sarujuk nggarap ing omahe Wisnu.</p>
+        </div></section>
+      <p class="note">🔍 <b>Analisis:</b> Mereka teman sekelas yang sudah akrab, jadi semua kata memakai ngoko (termasuk imbuhan) tanpa campuran krama atau krama inggil.</p>
+    </article>
+
+    <!-- NGOKO ALUS -->
+    <article class="tab-panel" id="t2">
+      <div class="lvl-head yellow"><b>Ngoko Alus</b><span class="formula">ngoko + krama inggil</span></div>
+      <section class="m-sec"><h4>📌 Pengertian</h4>
+        <p>Dasarnya ngoko, tetapi <b>diselipi krama inggil untuk menghormati lawan bicara</b>. Yang diganti krama inggil: kata kerja, kata ganti orang, dan kata benda tertentu. Imbuhan tetap ngoko, kecuali awalan <i>kok-</i> dan akhiran <i>-mu</i> yang diganti <i>panjenengan</i>.</p></section>
+      <section class="m-sec"><h4>👥 Dipakai kepada</h4>
+        <ul class="check">
+          <li><b>Status sama tapi saling menghormati.</b> Contoh: antarguru.</li>
+          <li><b>Orang yang lebih tinggi kepada yang lebih rendah tapi sudah sangat akrab.</b> Contoh: guru ke mantan muridnya yang sudah menjadi dokter.</li>
+        </ul></section>
+      <section class="m-sec"><h4>📏 Kaidah</h4>
+        <div class="do-dont">
+          <div class="do">✅ Kata untuk <b>orang yang dihormati</b> diganti krama inggil (jika ada).</div>
+          <div class="dont">❌ Kata untuk <b>diri sendiri</b> tetap ngoko, walaupun ada krama inggilnya.</div>
+          <div class="dont">❌ Kata untuk <b>hewan dan tumbuhan</b> tetap ngoko.</div>
+        </div></section>
+      <section class="m-sec"><h4>💬 Contoh percakapan: Wisnu &amp; Putri (kakak–adik)</h4>
+        <div class="chat">
+          <p class="l"><b>Wisnu</b>Put, Mas Wisnu arep menyang apotek dhisik, kowe ing omah ya?</p>
+          <p class="r"><b>Putri</b>Emoh Mas, yen Mas Wisnu <mark>tindak</mark> apotek, aku ya melu.</p>
+          <p class="l"><b>Wisnu</b>Aku mung sedhela kok Put.</p>
+          <p class="r"><b>Putri</b>Lha, <mark>panjenengan</mark> <mark>tindak</mark> apotek arep <mark>mundhut</mark> apa ta Mas?</p>
+        </div></section>
+      <p class="note">🔍 <b>Analisis:</b> Putri menghormati kakaknya, jadi memakai krama inggil (<mark>tindak, mundhut, panjenengan</mark>). Untuk dirinya sendiri tetap ngoko (<i>aku</i>).</p>
+    </article>
+
+    <!-- KRAMA LUGU -->
+    <article class="tab-panel" id="t3">
+      <div class="lvl-head blue"><b>Krama Lugu</b><span class="formula">krama semua</span></div>
+      <section class="m-sec"><h4>📌 Pengertian</h4>
+        <p>Ragam bahasa Jawa yang <b>seluruh kalimatnya memakai kosakata krama</b> dengan imbuhan krama. Kata ngoko diubah menjadi krama, <b>termasuk untuk diri sendiri</b> (jika ada padanannya). Tidak memakai krama inggil.</p></section>
+      <section class="m-sec"><h4>👥 Dipakai kepada</h4>
+        <ul class="check">
+          <li><b>Orang yang lebih tua kepada yang lebih muda tapi derajatnya lebih tinggi.</b></li>
+          <li><b>Status sama tapi belum akrab</b> (sudah kenal, belum akrab).</li>
+          <li><b>Bahasa tulis umum</b> yang tidak ditujukan kepada orang atau golongan tertentu.</li>
+          <li><b>Pidato umum.</b></li>
+        </ul></section>
+      <section class="m-sec"><h4>📏 Kaidah</h4>
+        <ul><li>Semua kata dan imbuhan memakai krama, termasuk untuk diri sendiri.</li><li>Tanpa krama inggil.</li></ul></section>
+      <section class="m-sec"><h4>💬 Contoh percakapan: Pak Santosa &amp; Pak Widodo (guru beda sekolah)</h4>
+        <div class="chat">
+          <p class="l"><b>Pak Santosa</b>Kulanuwun, Pak.</p>
+          <p class="r"><b>Pak Widodo</b>Inggih, mangga Pak, mangga lenggah ngriki.</p>
+          <p class="l"><b>Pak Santosa</b>Inggih matur nuwun, Pak.</p>
+          <p class="r"><b>Pak Widodo</b>Kadingaren menika, Pak. Nuwun sewu, <mark>sampeyan</mark> saking <mark>griya</mark> menapa saking sekolahan?</p>
+        </div></section>
+      <p class="note">🔍 <b>Analisis:</b> Guru SMA 1 dan SMA 2 belum akrab, jadi memakai krama lugu (<mark>sampeyan, griya, ngriki</mark>) untuk menjaga kesopanan yang standar.</p>
+    </article>
+
+    <!-- KRAMA ALUS -->
+    <article class="tab-panel" id="t4">
+      <div class="lvl-head green"><b>Krama Alus</b><span class="formula">krama + krama inggil</span></div>
+      <section class="m-sec"><h4>📌 Pengertian</h4>
+        <p>Ragam paling halus: <b>semua kosakatanya krama dan krama inggil</b>. Kata ngoko dan madya tidak pernah muncul.</p></section>
+      <section class="m-sec"><h4>👥 Dipakai kepada</h4>
+        <ul class="check">
+          <li><b>Orang yang lebih rendah kepada yang lebih tinggi.</b> Contoh: anak ke orang tua, cucu ke kakek, murid ke guru, bawahan ke atasan.</li>
+          <li><b>Status sama, belum kenal, dan ingin sangat menghormati.</b></li>
+          <li><b>Pidato resmi</b>, misalnya pranatacara pernikahan atau atur pambagyaharja.</li>
+        </ul></section>
+      <section class="m-sec"><h4>📏 Kaidah</h4>
+        <div class="do-dont">
+          <div class="do">✅ Kata untuk <b>orang yang dihormati</b> memakai krama inggil.</div>
+          <div class="dont">❌ Kata untuk <b>diri sendiri</b> cukup krama, bukan krama inggil.</div>
+          <div class="do">✅ Imbuhan krama: <i>di-</i> → <i>dipun-</i>, <i>-e</i> → <i>-ipun / -en</i>.</div>
+        </div></section>
+      <section class="m-sec"><h4>💬 Contoh: murid berbicara kepada Bapak Guru</h4>
+        <div class="chat">
+          <p class="r"><b>Murid</b>Nuwun sewu, Pak. Bapak badhe <mark>tindak</mark> pundi?</p>
+          <p class="r"><b>Murid</b><u>Kula</u> badhe <u>wangsul</u> rumiyin, Pak.</p>
+        </div></section>
+      <p class="note">🔍 <b>Analisis:</b> <mark>tindak</mark> (krama inggil) dipakai untuk Bapak Guru. Untuk diri sendiri cukup krama (<u>kula, wangsul</u>).</p>
+    </article>
+
+    <!-- KOSAKATA -->
+    <article class="tab-panel" id="t5">
+      <h3>🔤 Daftar Kosakata</h3>
+      <p>Perubahan kata dari Ngoko ke Krama dan Krama Inggil. Ketik kata untuk mencari.</p>
+      <input id="vocab-search" class="search" type="search" placeholder="Cari kata, misal: mangan, pulang, omah…" aria-label="Cari kosakata">
+      <div class="table-scroll"><table class="vocab" id="vocab-table">
+        <thead><tr><th>Ngoko</th><th>Krama</th><th>Krama Inggil</th><th>Bahasa Indonesia</th></tr></thead><tbody></tbody>
+      </table></div>
+      <p class="note">📝 Krama inggil hanya untuk orang lain yang dihormati. Untuk diri sendiri pakai kolom <b>Krama</b>.</p>
+    </article>
+
+    <!-- TIPS -->
+    <article class="tab-panel" id="t6">
+      <h3>💡 Cara cepat memilih ragam</h3>
+      <ol class="steps">
+        <li><b>Siapa lawan bicaramu?</b> Lebih tua atau lebih tinggi kedudukannya? Atau teman sebaya?</li>
+        <li><b>Sudah akrab atau belum?</b> Akrab cenderung ngoko, belum akrab cenderung krama.</li>
+        <li><b>Perlu menghormati?</b> Kalau ya, tambahkan krama inggil untuk kata yang menyangkut orang itu.</li>
+        <li><b>Cek diri sendiri.</b> Kata untuk diri sendiri tidak boleh krama inggil.</li>
+      </ol>
+      <div class="table-scroll"><table class="vocab">
+        <thead><tr><th>Situasi</th><th>Ragam yang trep</th></tr></thead>
+        <tbody>
+          <tr><td>Teman sebaya yang sudah akrab, orang tua ke anak, kakak ke adik</td><td><span class="pill red">Ngoko Lugu</span></td></tr>
+          <tr><td>Status sama tapi saling menghormati; orang lebih tinggi yang sudah sangat akrab</td><td><span class="pill yellow">Ngoko Alus</span></td></tr>
+          <tr><td>Orang tua ke yang lebih muda tapi berderajat tinggi; status sama tapi belum akrab</td><td><span class="pill blue">Krama Lugu</span></td></tr>
+          <tr><td>Anak ke orang tua, murid ke guru, bawahan ke atasan, orang belum dikenal yang dihormati</td><td><span class="pill green">Krama Alus</span></td></tr>
+        </tbody>
+      </table></div>
+      <h4>⚠️ Kesalahan yang sering terjadi</h4>
+      <div class="do-dont">
+        <div class="dont">❌ Memakai krama inggil untuk diri sendiri, misalnya <i>"Aku arep <b>sare</b>."</i></div>
+        <div class="do">✅ Untuk diri sendiri cukup ngoko/krama: <i>"Aku arep turu."</i></div>
+        <div class="dont">❌ Mencampur ngoko dan krama tanpa aturan, misalnya <i>"<b>Kowe</b> badhe <b>dhahar</b>?"</i></div>
+        <div class="do">✅ Pilih satu ragam yang konsisten: <i>"Panjenengan badhe dhahar?"</i></div>
+      </div>
+      <p class="note"><b>Catatan:</b> Dalam praktiknya, tingkatan bahasa sangat bergantung pada konteks, tempat, dan siapa lawan bicaranya.</p>
+    </article>
+  </div>
+</div>
+
+<!-- ================= MODAL: PERATURAN ================= -->
+<div id="m-aturan" class="modal" role="dialog" aria-modal="true" aria-labelledby="t-aturan">
+  <div class="modal-box large">
+    <button class="close" data-close aria-label="Tutup">✕</button>
+    <h2 id="t-aturan">📜 Cara Bermain</h2>
+    <p class="lead">4 pemain atau kelompok (🔴 Merah, 🔵 Biru, 🟢 Hijau, 🟡 Kuning) bergiliran di satu perangkat. <b>Tujuan:</b> masukkan keempat pion ke tengah papan (finis) sambil menjawab soal unggah-ungguh.</p>
+
+    <h4>🔁 Alur satu giliran</h4>
+    <div class="flow">
+      <div class="flow-step"><span>1</span>🎲<b>Kocok dadu</b><small>Tekan KOCOK DADU</small></div>
+      <div class="flow-step"><span>2</span>❓<b>Jawab soal</b><small>Pilih A, B, C, atau D</small></div>
+      <div class="flow-step"><span>3</span>♟️<b>Gerakkan pion</b><small>Kalau jawaban benar</small></div>
+      <div class="flow-step"><span>4</span>➡️<b>Ganti giliran</b><small>Angka 6 = main lagi</small></div>
+    </div>
+
+    <details class="acc" open><summary>🏠 Mengeluarkan pion dari kandang</summary>
+      <ul class="check">
+        <li>Semua pion mulai di <b>kandang (kotak awal)</b>.</li>
+        <li>Pion hanya bisa keluar dengan <b>angka 6</b> dan <b>jawaban benar</b>. Pion keluar ke petak ➤ warnamu.</li>
+        <li>Selama <b>belum ada pion yang keluar</b>, angka 1–5 <b>tidak diberi soal</b> dan giliran langsung pindah.</li>
+        <li>Kalau dapat 6 tapi jawabannya salah saat semua pion masih di kandang, pion tetap di kandang <b>tanpa pengurangan poin</b>.</li>
+        <li>Setiap pion berikutnya juga butuh angka 6 untuk keluar.</li>
+      </ul>
+    </details>
+
+    <details class="acc" open><summary>🎲 Angka dadu menentukan tingkat soal</summary>
+      <div class="table-scroll"><table class="vocab mini centered">
+        <tr><th>Dadu</th><td>⚀ 1</td><td>⚁ 2</td><td>⚂ 3</td><td>⚃ 4</td><td>⚄ 5</td><td>⚅ 6</td></tr>
+        <tr><th>Soal</th><td>C1</td><td>C1</td><td>C2</td><td>C3</td><td>C3</td><td>C4</td></tr>
+        <tr><th>Jenis</th><td colspan="2">Mengingat</td><td>Memahami</td><td colspan="2">Menerapkan</td><td>Menganalisis</td></tr>
+      </table></div>
+      <p class="muted">Makin besar angkanya, makin sulit soalnya, tetapi pion juga melangkah lebih jauh. Soal yang sudah kamu dapat tidak akan muncul lagi selama masih ada soal lain.</p>
+    </details>
+
+    <details class="acc" open><summary>✅ Jawaban benar dan ❌ jawaban salah</summary>
+      <div class="two-col">
+        <div class="do"><b>✅ Benar</b>
+          <ul><li>Pilih satu pion, lalu pion maju sesuai angka dadu.</li><li>Kalau hanya satu pion yang bisa bergerak, pion itu bergerak otomatis.</li></ul></div>
+        <div class="dont"><b>❌ Salah</b>
+          <ul><li>Poin −2 (kecuali saat semua pion masih di kandang).</li>
+          <li>Pion yang terakhir digerakkan <b>mundur 1 petak</b>.</li>
+          <li>Kalau petak di belakangnya sudah ada pion lain, pionmu <b>kembali ke kandang</b>.</li>
+          <li>Pion yang mundur dari petak ➤ juga kembali ke kandang.</li></ul></div>
+      </div>
+    </details>
+
+    <details class="acc"><summary>🗺️ Petak khusus dan aturan papan</summary>
+      <ul class="check">
+        <li><b>➤ Petak awal</b> dan <b>★ petak aman</b>: pion di sini tidak bisa dimakan.</li>
+        <li>Kalau pionmu berhenti tepat di petak pion lawan (bukan petak aman), <b>pion lawan dimakan</b> dan kembali ke kandang.</li>
+        <li>Setelah satu putaran, pion masuk ke <b>jalur berwarna</b> menuju finis. Angka dadu harus <b>pas</b>, tidak boleh lebih.</li>
+        <li>Pion yang sudah finis tidak bisa digerakkan lagi.</li>
+        <li>Angka <b>6</b> memberi <b>giliran tambahan</b> setelah soal dan gerakan selesai.</li>
+      </ul>
+    </details>
+
+    <details class="acc"><summary>💡 Bantuan</summary>
+      <ul class="check">
+        <li>Setiap warna punya <b>3 bantuan</b> untuk satu permainan. Bantuan tidak bisa dipindahkan ke warna lain.</li>
+        <li>Tekan <b>💡 BANTUAN</b> saat soal muncul. Bantuan berisi petunjuk konteks, ringkasan materi, dan arti kata, tetapi <b>tidak memberi kunci jawaban</b>.</li>
+      </ul>
+    </details>
+
+    <details class="acc"><summary>🏅 Poin dan nilai akhir</summary>
+      <div class="table-scroll"><table class="vocab">
+        <thead><tr><th>Kejadian</th><th>Poin</th></tr></thead>
+        <tbody>
+          <tr><td>Setiap 1 langkah maju (termasuk keluar kandang)</td><td class="plus">+1</td></tr>
+          <tr><td>Jawaban salah (kalau sudah ada pion yang keluar)</td><td class="minus">−2</td></tr>
+          <tr><td>Setiap 1 langkah mundur</td><td class="minus">−1</td></tr>
+          <tr><td>Pion kembali ke kandang (ditabrak atau dimakan)</td><td class="minus">− semua poin perjalanan pion itu</td></tr>
+        </tbody>
+      </table></div>
+      <p><b>Nilai akhir</b> dihitung dari posisi pion, ketepatan menjawab, dan poin (skor 50–100), lalu dibatasi maksimal sesuai peringkat: 🥇 Juara 1 maks. 100 · 🥈 Juara 2 maks. 89 · 🥉 Juara 3 maks. 79 · Juara 4 maks. 69. Pemain dengan hasil yang sama mendapat peringkat dan nilai yang sama. Tidak ada nilai nol.</p>
+    </details>
+
+    <details class="acc"><summary>⏹ Mengakhiri permainan</summary>
+      <ul class="check">
+        <li>Permainan selesai otomatis kalau 3 pemain sudah memasukkan keempat pionnya.</li>
+        <li>Tekan <b>AKHIRI PERMAINAN</b> kapan saja untuk berhenti. Hasil akhir dan transkrip PDF langsung muncul.</li>
+      </ul>
+    </details>
+  </div>
+</div>
+
+<!-- ================= MODAL: PEMBUAT ================= -->
+<div id="m-pembuat" class="modal" role="dialog" aria-modal="true" aria-labelledby="t-pembuat">
+  <div class="modal-box">
+    <button class="close" data-close aria-label="Tutup">✕</button>
+    <h2 id="t-pembuat">Pembuat Game</h2>
+    <dl class="maker">
+      <dt>Nama</dt><dd>Achmad Wildan Tafrijiayanto</dd>
+    </dl>
+  </div>
+</div>
+
+<!-- ================= MODAL: SOAL ================= -->
+<div id="m-soal" class="modal" role="dialog" aria-modal="true" aria-labelledby="q-text">
+  <div class="modal-box question">
+    <div class="q-head">
+      <span id="q-player" class="chip">-</span>
+      <span id="q-level" class="chip level">-</span>
+    </div>
+    <p id="q-text" class="q-text"></p>
+    <div id="q-options" class="q-options"></div>
+    <div id="q-hint" class="q-hint" hidden></div>
+    <button id="btn-hint" class="btn small yellow">💡 BANTUAN (<span id="hint-left">3</span>)</button>
+  </div>
+</div>
+
+<!-- ================= MODAL: UMPAN BALIK ================= -->
+<div id="m-feedback" class="modal" role="alertdialog" aria-modal="true" aria-labelledby="fb-text">
+  <div class="modal-box feedback">
+    <div id="fb-icon" class="fb-icon"></div>
+    <p id="fb-text" class="fb-text"></p>
+    <p id="fb-extra" class="fb-extra"></p>
+    <button id="btn-fb" class="btn big">Lanjut</button>
+  </div>
+</div>
+
+<!-- ================= MODAL: HASIL DADU ================= -->
+<div id="m-dice" class="modal" role="alertdialog" aria-modal="true" aria-labelledby="dm-text" data-close>
+  <div class="modal-box dice-box">
+    <div id="dm-num" class="dm-num">6</div>
+    <p id="dm-text" class="dm-text"></p>
+  </div>
+</div>
+
+<!-- ================= MODAL: KONFIRMASI ================= -->
+<div id="m-confirm" class="modal" role="alertdialog" aria-modal="true" aria-labelledby="cf-text">
+  <div class="modal-box small-box">
+    <p id="cf-text" class="cf-text">Apakah Anda yakin ingin mengakhiri permainan?</p>
+    <div class="row-btns">
+      <button id="btn-yes" class="btn danger">YA</button>
+      <button class="btn ghost" data-close>BATAL</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= MODAL: KEMENANGAN ================= -->
+<div id="m-win" class="modal" role="alertdialog" aria-modal="true" aria-labelledby="win-text">
+  <div class="modal-box win">
+    <div class="trophy">🏆</div>
+    <p id="win-rank" class="win-rank">JUARA 1</p>
+    <p id="win-text" class="win-text"></p>
+    <button class="btn big green" data-close>Lanjut</button>
+  </div>
+</div>
+
+<!-- ================= MODAL: DETAIL ================= -->
+<div id="m-detail" class="modal" role="dialog" aria-modal="true" aria-labelledby="t-detail">
+  <div class="modal-box large">
+    <button class="close" data-close aria-label="Tutup">✕</button>
+    <h2 id="t-detail">Detail Hasil</h2>
+    <div class="tabs" id="detail-tabs"></div>
+    <div id="detail-body"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div id="fx" class="fx" aria-hidden="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js" defer></script>
+<script src="questions.js" defer></script>
+<script src="game.js" defer></script>
+</body>
+</html>
